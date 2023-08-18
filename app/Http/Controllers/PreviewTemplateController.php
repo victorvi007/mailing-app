@@ -27,6 +27,9 @@ class PreviewTemplateController extends Controller
        if($getTemplate->name == 'Blockchain'){
             return view('mail.preview.blockchain',compact('getMail'));
        }
+       if($getTemplate->name == 'Bybit'){
+            return view('mail.preview.bybit',compact('getMail'));
+       }
 
    }
 

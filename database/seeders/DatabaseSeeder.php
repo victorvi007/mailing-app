@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Database\Seeders\MailSeeder;
+use Database\Seeders\TemplateSeeder;
 use Database\Seeders\MailingListSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -17,9 +19,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(1)->create();
-        // $this->call([
-        //     MailingListSeeder::class,
-        // ]);
+
+        $this->call([
+            MailingListSeeder::class,
+            MailSeeder::class,
+            TemplateSeeder::class
+        ]);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
