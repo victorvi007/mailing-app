@@ -21,4 +21,8 @@ class ViewMailController extends Controller
     public function viewBlockchain(){
         return view('mail.blockchain');
     }
+
+    public function viewKraken(){
+        return view('mail.kraken');
+    }
 }

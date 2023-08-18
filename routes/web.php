@@ -56,6 +56,7 @@ Route::post('/login',[LoginController::class ,'login'])->name('sign-login');
     Route::get('/mail/kucoin',[ViewMailController::class ,'viewKucoin'])->name('kucoin')->middleware('auth');
     Route::get('/mail/latoken',[ViewMailController::class ,'viewLatoken'])->name('latoken')->middleware('auth');
     Route::get('/mail/bitpay',[ViewMailController::class ,'viewBitpay'])->name('bitpay')->middleware('auth');
+    Route::get('/mail/kraken',[ViewMailController::class ,'viewKraken'])->name('kraken')->middleware('auth');
 
     //mail routes
     Route::get('/mail/preview/{id}/{msg}',[PreviewTemplateController::class ,'preview'])->name('preview')->middleware('auth');

@@ -30,6 +30,9 @@ class PreviewTemplateController extends Controller
        if($getTemplate->name == 'Bybit'){
             return view('mail.preview.bybit',compact('getMail'));
        }
+       if($getTemplate->name == 'Kraken'){
+            return view('mail.preview.kraken',compact('getMail'));
+       }
 
    }
 

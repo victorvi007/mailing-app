@@ -20,7 +20,8 @@ class TemplateSeeder extends Seeder
            ['name'=>'KuCoin'],
            ['name'=>'Bitpay'],
            ['name'=>'Latoken'],
-           ['name'=>'Blockchain']
+           ['name'=>'Blockchain'],
+           ['name'=>'Kraken'],
 
        ];
        foreach ($templates as  $template) {

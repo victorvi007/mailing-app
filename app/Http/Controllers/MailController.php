@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\Bybit;
 use App\Mail\bitPay;
+use App\Mail\Kraken;
 use App\Mail\kucoin;
 use App\Mail\Binance;
 use App\Mail\Latoken;
@@ -112,6 +113,10 @@ class MailController extends Controller
         if($request->template == 'Bybit'){
 
             $mailSent =  Mail::to($request->email)->send(new Bybit($message,$subject,$attachment,$fileExtention,$attachment_name));
+        }
+        if($request->template == 'Kraken'){
+
+            $mailSent =  Mail::to($request->email)->send(new Kraken($message,$subject,$attachment,$fileExtention,$attachment_name));
         }
        if($mailSent){
            $historyRepository->createHistory($request);
