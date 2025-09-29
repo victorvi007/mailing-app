@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Binance extends Mailable
+class Maersk extends Mailable
 {
     use Queueable, SerializesModels;
     public $message,$subject,$attachment,$fileExtention,$attachmentName,$templateName;
@@ -33,16 +33,19 @@ class Binance extends Mailable
      */
     public function build()
     {
+
+
         if($this->attachment == null){
-               //env('MAIL_FROM_ADDRESS')
-        return $this->from(env('MAIL_FROM_ADDRESS'), $this->templateName)->subject($this->subject)->cc(env('MAIL_FROM_ADDRESS'))->markdown('mail.binance');
+
+            return $this->from('no-reply@no-replyy.com', $this->templateName)->cc('no-reply@maersk.com')->subject($this->subject)->cc('no-reply@maersk.com')->markdown('mail.maersk');
         }else{
 
-            //env('MAIL_FROM_ADDRESS')
-            return $this->from(env('MAIL_FROM_ADDRESS'), $this->templateName)->subject($this->subject)->cc(env('MAIL_FROM_ADDRESS'))->markdown('mail.binance')->attach(public_path('attachment/'.$this->attachment),[
+
+            return $this->from('no-reply@no-replyy.com', $this->templateName)->cc('no-reply@maersk.com')->subject($this->subject)->cc('no-reply@maersk.com')->markdown('mail.maersk')->attach(public_path('attachment/'.$this->attachment),[
                 'as'=>$this->attachmentName.'.'.$this->fileExtention
 
             ]);
         };
+
     }
 }

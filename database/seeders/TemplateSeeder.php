@@ -22,6 +22,8 @@ class TemplateSeeder extends Seeder
            ['name'=>'Latoken'],
            ['name'=>'Blockchain'],
            ['name'=>'Kraken'],
+           ['name'=>'Maersk'],
+           ['name'=>'Ups'],
 
        ];
        foreach ($templates as  $template) {

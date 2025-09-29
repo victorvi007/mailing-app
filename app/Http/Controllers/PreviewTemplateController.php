@@ -9,8 +9,10 @@ use App\Repository\TemplateRepository;
 class PreviewTemplateController extends Controller
 {
    public function preview(TemplateRepository $templateRepository,MailRepository $mailRepository ,$templete,$mail_id){
+
        $getTemplate = $templateRepository->getTemplate($templete);
        $getMail = $mailRepository->getMail($mail_id);
+
 
        if($getTemplate->name == 'Binance'){
         return view('mail.preview.binance',compact('getMail'));
@@ -32,6 +34,12 @@ class PreviewTemplateController extends Controller
        }
        if($getTemplate->name == 'Kraken'){
             return view('mail.preview.kraken',compact('getMail'));
+       }
+       if($getTemplate->name == 'Maersk'){
+            return view('mail.preview.maersk',compact('getMail','getTemplate'));
+       }
+       if($getTemplate->name == 'Ups'){
+            return view('mail.preview.ups',compact('getMail','getTemplate'));
        }
 
    }

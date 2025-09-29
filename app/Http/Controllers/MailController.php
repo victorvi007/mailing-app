@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Mail\Ups;
 use App\Mail\Bybit;
 use App\Mail\bitPay;
 use App\Mail\Kraken;
 use App\Mail\kucoin;
+use App\Mail\Maersk;
 use App\Mail\Binance;
 use App\Mail\Latoken;
 use App\Mail\Blockchain;
@@ -66,12 +68,14 @@ class MailController extends Controller
 
     public function send(SendMailRequest $request,HistoryRepository $historyRepository){
 
+
         if(isset($request->attachment)){
             $fileExtention =$request->attachment->extension();
             $fileName = str_replace(' ', '-', $request->attachment_name).time().'.'.$fileExtention;
             $storeFile = $request->attachment->move(public_path('attachment'),$fileName);
 
             $subject = $request->subject;
+            $templateName = $request->template;
             $message = $request->message;
             $attachment_name = $request->attachment_name;
             $attachment = $fileName;
@@ -79,6 +83,7 @@ class MailController extends Controller
             $fileExtention =null;
             $subject = $request->subject;
             $message = $request->message;
+            $templateName = $request->template;
             $attachment_name = null;
             $attachment = null;
         }
@@ -89,34 +94,42 @@ class MailController extends Controller
 
             // dd($message,$subject,$attachment,$fileExtention,$attachment_name);
 
-            $mailSent =  Mail::to($request->email)->send(new Binance($message,$subject,$attachment,$fileExtention,$attachment_name));
+            $mailSent =  Mail::to($request->email)->send(new Binance($message,$subject,$attachment,$fileExtention,$attachment_name,$templateName));
         }
 
         if($request->template == 'KuCoin'){
 
-            $mailSent =  Mail::to($request->email)->send(new kucoin($message,$subject,$attachment,$fileExtention,$attachment_name));
+            $mailSent =  Mail::to($request->email)->send(new kucoin($message,$subject,$attachment,$fileExtention,$attachment_name,$templateName));
         }
 
         if($request->template == 'Bitpay'){
 
-            $mailSent =  Mail::to($request->email)->send(new bitPay($message,$subject,$attachment,$fileExtention,$attachment_name));
+            $mailSent =  Mail::to($request->email)->send(new bitPay($message,$subject,$attachment,$fileExtention,$attachment_name,$templateName));
         }
 
         if($request->template == 'Latoken'){
 
-            $mailSent =  Mail::to($request->email)->send(new Latoken($message,$subject,$attachment,$fileExtention,$attachment_name));
+            $mailSent =  Mail::to($request->email)->send(new Latoken($message,$subject,$attachment,$fileExtention,$attachment_name,$templateName));
         }
         if($request->template == 'Blockchain'){
 
-            $mailSent =  Mail::to($request->email)->send(new Blockchain($message,$subject,$attachment,$fileExtention,$attachment_name));
+            $mailSent =  Mail::to($request->email)->send(new Blockchain($message,$subject,$attachment,$fileExtention,$attachment_name,$templateName));
         }
         if($request->template == 'Bybit'){
 
-            $mailSent =  Mail::to($request->email)->send(new Bybit($message,$subject,$attachment,$fileExtention,$attachment_name));
+            $mailSent =  Mail::to($request->email)->send(new Bybit($message,$subject,$attachment,$fileExtention,$attachment_name,$templateName));
         }
         if($request->template == 'Kraken'){
 
-            $mailSent =  Mail::to($request->email)->send(new Kraken($message,$subject,$attachment,$fileExtention,$attachment_name));
+            $mailSent =  Mail::to($request->email)->send(new Kraken($message,$subject,$attachment,$fileExtention,$attachment_name,$templateName));
+        }
+        if($request->template == 'Maersk'){
+
+            $mailSent =  Mail::to($request->email)->send(new Maersk($message,$subject,$attachment,$fileExtention,$attachment_name,$templateName));
+        }
+        if($request->template == 'Ups'){
+
+            $mailSent =  Mail::to($request->email)->send(new Ups($message,$subject,$attachment,$fileExtention,$attachment_name,$templateName));
         }
        if($mailSent){
            $historyRepository->createHistory($request);

@@ -14,12 +14,16 @@ class DashboardController extends Controller
 
         return view('dashboard.dashboard',compact('lists'));
     }
+
+
     public function add_email(MailingListRepository $mailingListRepository,EmailRequest $request){
         $addEmail =$mailingListRepository->storeEmail($request);
         if($addEmail){
             return redirect()->back()->with('message',['title' => 'Successful', 'message' => 'New Email Added!', 'type' => 'success']);
         }
     }
+
+    
     public function delete_email(MailingListRepository $mailingListRepository, $id){
         $addEmail =$mailingListRepository->deleteEmail($id);
         if($addEmail){

@@ -11,19 +11,20 @@ class Bybit extends Mailable
 {
 
     use Queueable, SerializesModels;
-    public $message,$subject,$attachment,$fileExtention,$attachment_name;
+    public $message,$subject,$attachment,$fileExtention,$attachmentName,$templateName;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($message,$subject,$attachment,$fileExtention,$attachment_name)
+    public function __construct($message,$subject,$attachment,$fileExtention,$attachmentName,$templateName)
     {
-       $this->message = $message;
-       $this->subject= $subject;
-       $this->attachment = $attachment;
-       $this->fileExtention = $fileExtention;
-       $this->attachmentName = $attachment_name;
+        $this->message = $message;
+        $this->subject= $subject;
+        $this->attachment = $attachment;
+        $this->fileExtention = $fileExtention;
+        $this->attachmentName = $attachmentName;
+        $this->templateName = $templateName;
     }
 
     /**
@@ -36,11 +37,11 @@ class Bybit extends Mailable
 
         if($this->attachment == null){
             //env('MAIL_FROM_ADDRESS')
-            return $this->from('no-reply@bybit.com')->subject($this->subject)->cc('no-reply@bybit.com')->markdown('mail.bybit');
+            return $this->from('no-reply@no-replyy.com', $this->templateName)->subject($this->subject)->cc('no-reply@bybit.com')->markdown('mail.bybit');
         }else{
 
             //env('MAIL_FROM_ADDRESS')
-            return $this->from('no-reply@bybit.com')->subject($this->subject)->cc('no-reply@bybit.com')->markdown('mail.bybit')->attach(public_path('attachment/'.$this->attachment),[
+            return $this->from('no-reply@no-replyy.com', $this->templateName)->subject($this->subject)->cc('no-reply@bybit.com')->markdown('mail.bybit')->attach(public_path('attachment/'.$this->attachment),[
                 'as'=>$this->attachmentName.'.'.$this->fileExtention
 
             ]);
